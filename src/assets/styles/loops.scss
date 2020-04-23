@@ -1,0 +1,77 @@
+$marginVal: 0px;
+@for $i from 0 through 10 {
+  .m-#{$i} {
+    margin: $marginVal !important;
+  }
+  .mx-#{$i} {
+    margin: 0 $marginVal !important;
+  }
+  .my-#{$i} {
+    margin: $marginVal 0 !important;
+  }
+  .mt-#{$i} {
+    margin-top: $marginVal !important;
+  }
+  .mb-#{$i} {
+    margin-bottom: $marginVal !important;
+  }
+  .mr-#{$i} {
+    @if ($ltr) {
+      margin-right: $marginVal !important;
+      margin-left: 0 !important;
+    } @else {
+      margin-right: 0 !important;
+      margin-left: $marginVal !important;
+    }
+  }
+  .ml-#{$i} {
+    @if ($ltr) {
+      margin-right: 0 !important;
+      margin-left: $marginVal !important;
+    } @else {
+      margin-right: $marginVal !important;
+      margin-left: 0 !important;
+    }
+  }
+
+  $marginVal: $marginVal + 5;
+}
+
+$paddingVal: 0px;
+@for $i from 0 through 10 {
+  .p-#{$i} {
+    padding: $paddingVal !important;
+  }
+  .px-#{$i} {
+    padding: 0 $paddingVal !important;
+  }
+  .py-#{$i} {
+    padding: $paddingVal 0 !important;
+  }
+  .pt-#{$i} {
+    padding-top: $paddingVal !important;
+  }
+  .pb-#{$i} {
+    padding-bottom: $paddingVal !important;
+  }
+  .pr-#{$i} {
+    @if ($ltr) {
+      padding-right: $paddingVal !important;
+      padding-left: 0 !important;
+    } @else {
+      padding-right: 0 !important;
+      padding-left: $paddingVal !important;
+    }
+  }
+  .pl-#{$i} {
+    @if ($ltr) {
+      padding-right: 0 !important;
+      padding-left: $paddingVal !important;
+    } @else {
+      padding-right: $paddingVal !important;
+      padding-left: 0 !important;
+    }
+  }
+
+  $paddingVal: $paddingVal + 5;
+}

@@ -1,0 +1,35 @@
+.login-page {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background: $dark;
+
+  .login-content-section {
+    width: 40%;
+    flex-shrink: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+
+    .title {
+      font-size: 2rem;
+      color: #fff;
+      text-transform: capitalize;
+      margin-bottom: 20px;
+    }
+    .btn {
+      margin: 10px 0 0 0;
+    }
+  }
+  .login-img-section {
+    flex-grow: 1;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}

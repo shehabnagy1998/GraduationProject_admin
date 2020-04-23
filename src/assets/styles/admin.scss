@@ -1,0 +1,45 @@
+.admin-page {
+  padding: 20px 0;
+
+  .admin-section {
+    background: $secondary;
+    padding: 10px;
+    margin: 0 20px 20px;
+    padding: 20px;
+    display: flex;
+    flex-flow: column;
+
+    &:last-child {
+      margin: 0 20px;
+    }
+  }
+  .btns-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .title {
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: #fff;
+
+    button {
+      border: 0;
+      background: none;
+      color: #fff;
+    }
+  }
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 10px 0;
+    align-items: center;
+  }
+  .form-control {
+    input,
+    select {
+      background: $dark;
+      box-shadow: none;
+    }
+  }
+}

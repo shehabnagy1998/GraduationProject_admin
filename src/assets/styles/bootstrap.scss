@@ -1,0 +1,26 @@
+@import "bootstrap/scss/_functions.scss";
+@import "bootstrap/scss/_variables.scss";
+@import "bootstrap/scss/_mixins.scss";
+@import "bootstrap/scss/_grid.scss";
+@import "bootstrap/scss/_reboot.scss";
+@import "bootstrap/scss/_tables.scss";
+@import "font-awesome.scss";
+@import "~react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+@import "~react-toastify/dist/ReactToastify.min.css";
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none !important;
+}
+
+@import "./loops.scss";
+
+@import "./common.scss";
+@import "./modal.scss";
+
+@import "./forms.scss";
+@import "./navbar.scss";
+@import "./sidemenu.scss";
+@import "./login.scss";
+@import "./admin.scss";

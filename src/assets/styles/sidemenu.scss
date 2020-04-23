@@ -1,0 +1,21 @@
+.sidemenu {
+  padding: 40px 20px;
+
+  .sidemenu-list-item {
+    margin: 0 0 20px 0;
+
+    .list-item-text {
+      font-size: 1.3rem;
+      color: #fff;
+      text-decoration: none;
+      text-transform: capitalize;
+      border: 0;
+      background: none;
+    }
+
+    .nesting {
+      padding: 20px 30px 0;
+      display: none;
+    }
+  }
+}
