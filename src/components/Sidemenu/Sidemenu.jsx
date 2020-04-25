@@ -34,7 +34,7 @@ const Sidemenu = () => {
             grade year
           </Link>
         </div>
-        {/* <div
+        <div
           className="sidemenu-list-item"
           onClick={(_) => handleExpand("user")}
         >
@@ -46,28 +46,33 @@ const Sidemenu = () => {
           </div>
           <div className="nesting" id="user-nesting">
             <div className="sidemenu-list-item">
-              <Link className="list-item-text" to="/">
+              <Link className="list-item-text" to="/dashboard/user/doctor">
                 doctor
               </Link>
             </div>
             <div className="sidemenu-list-item">
-              <Link className="list-item-text" to="/">
+              <Link className="list-item-text" to="/dashboard/user/assistant">
                 assistant
               </Link>
             </div>
             <div className="sidemenu-list-item">
-              <Link className="list-item-text" to="/">
+              <Link className="list-item-text" to="/dashboard/user/student">
                 student
+              </Link>
+            </div>
+            <div className="sidemenu-list-item">
+              <Link className="list-item-text" to="/dashboard/user/admin">
+                admin
               </Link>
             </div>
           </div>
         </div>
         <div className="sidemenu-list-item">
-          <Link className="list-item-text" to="/">
+          <Link className="list-item-text" to="/dashboard/course">
             courses
           </Link>
         </div>
-        <div className="sidemenu-list-item">
+        {/* <div className="sidemenu-list-item">
           <Link className="list-item-text" to="/">
             announcement
           </Link>

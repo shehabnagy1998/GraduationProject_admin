@@ -15,9 +15,7 @@ function App({ pageLoaders, browseHistorySet, userDetails }) {
 
   return (
     <>
-      {/* {(pageLoaders.getDepartment || pageLoaders.getGradeYear) && (
-        <PageSpinner />
-      )} */}
+      {pageLoaders.logout && <PageSpinner />}
       <ToastContainer />
       <Switch>
         {!userDetails.code && (

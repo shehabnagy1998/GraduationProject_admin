@@ -6,6 +6,11 @@ import PageGradeYear from "../GradeYear/PageGradeYear";
 import Navbar from "../Navbar/Navbar";
 import Sidemenu from "../Sidemenu/Sidemenu";
 import { Switch, Route, Redirect } from "react-router-dom";
+import PageStudent from "../Student/PageStudent";
+import PageDoctor from "../Doctor/PageDoctor";
+import PageAssistant from "../Assistant/PageAssistant";
+import PageAdmin from "../Admin/PageAdmin";
+import PageCourse from "../Course/PageCourse";
 
 const PageDashboard = () => {
   return (
@@ -19,7 +24,12 @@ const PageDashboard = () => {
           <Route path="/dashboard/institute" component={PageInstitute} />
           <Route path="/dashboard/department" component={PageDepartment} />
           <Route path="/dashboard/gradeYear" component={PageGradeYear} />
-          {<Redirect to="/dashboard/institute" />}
+          <Route path="/dashboard/course" component={PageCourse} />
+          <Route path="/dashboard/user/student" component={PageStudent} />
+          <Route path="/dashboard/user/doctor" component={PageDoctor} />
+          <Route path="/dashboard/user/assistant" component={PageAssistant} />
+          <Route path="/dashboard/user/admin" component={PageAdmin} />
+          <Redirect to="/dashboard/institute" />
         </Switch>
       </article>
     </main>

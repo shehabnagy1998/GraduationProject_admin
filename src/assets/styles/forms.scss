@@ -1,3 +1,11 @@
+.form-control-container {
+  display: flex;
+  align-items: flex-start;
+
+  .form-control {
+    margin: 0 20px 20px 0;
+  }
+}
 .form-control {
   width: 100%;
   margin: 0 0 20px 0;

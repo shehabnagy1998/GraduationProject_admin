@@ -7,6 +7,8 @@ import {
   REDUX_PAGE_ERRORS,
   REDUX_PAGE_HELPERS,
   REDUX_BROWSE_HISTORY,
+  REDUX_USERS,
+  REDUX_COURSE,
 } from "../CONSTANTS";
 
 const initState = {
@@ -17,6 +19,8 @@ const initState = {
   instituteArr: [],
   departmentArr: [],
   gradeYearArr: [],
+  userArr: [],
+  courseArr: [],
   browseHistory: {},
 };
 
@@ -68,6 +72,18 @@ export default (state = initState, action) => {
       return {
         ...state,
         browseHistory: action.value,
+      };
+
+    case REDUX_USERS:
+      return {
+        ...state,
+        userArr: action.value,
+      };
+
+    case REDUX_COURSE:
+      return {
+        ...state,
+        courseArr: action.value,
       };
 
     default:

@@ -9,14 +9,16 @@ export const REDUX_USER = "REDUX_USER";
 export const REDUX_GRADE_YEAR = "REDUX_GRADE_YEAR";
 export const REDUX_DEPARTMENT = "REDUX_DEPARTMENT";
 export const REDUX_INSTITUTE = "REDUX_INSTITUTE";
+export const REDUX_COURSE = "REDUX_COURSE";
 export const REDUX_PAGE_LOADERS = "REDUX_PAGE_LOADERS";
 export const REDUX_PAGE_ERRORS = "REDUX_PAGE_ERRORS";
 export const REDUX_PAGE_HELPERS = "REDUX_PAGE_HELPERS";
+export const REDUX_USERS = "REDUX_USERS";
 export const REDUX_BROWSE_HISTORY = "REDUX_BROWSE_HISTORY";
 
 ///// VALIDATION /////
 export const VALIDATION = {
-  email: /^([a-z0-9._]+)@([a-z0-9]+)\.([a-z]{3,5})$/,
+  email: /^([a-z0-9._]+)@([a-z0-9]+)\.([a-z]{3,4})$/,
   password: /^[a-z0-9A-Z]{8,}$/,
   name: /^[a-z0-9 ]{3,}$/,
   code: /^[0-9]+$/,
