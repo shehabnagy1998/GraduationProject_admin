@@ -20,17 +20,17 @@ const Sidemenu = () => {
     <div className="sidemenu">
       <div className="sidemenu-list">
         <div className="sidemenu-list-item">
-          <Link className="list-item-text" to="/institute">
+          <Link className="list-item-text" to="/dashboard/institute">
             institute
           </Link>
         </div>
         <div className="sidemenu-list-item">
-          <Link className="list-item-text" to="/department">
+          <Link className="list-item-text" to="/dashboard/department">
             department
           </Link>
         </div>
         <div className="sidemenu-list-item">
-          <Link className="list-item-text" to="/gradeYear">
+          <Link className="list-item-text" to="/dashboard/gradeYear">
             grade year
           </Link>
         </div>
