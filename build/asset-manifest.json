@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bf033fdb.chunk.css",
+    "main.js": "/static/js/main.0891f46b.chunk.js",
+    "main.js.map": "/static/js/main.0891f46b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b11bc7a8.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b11bc7a8.js.map",
+    "static/css/2.364eb9c8.chunk.css": "/static/css/2.364eb9c8.chunk.css",
+    "static/js/2.b75eef3f.chunk.js": "/static/js/2.b75eef3f.chunk.js",
+    "static/js/2.b75eef3f.chunk.js.map": "/static/js/2.b75eef3f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f13fc0c052d0d54ca67c902d2d4e10a7.js": "/precache-manifest.f13fc0c052d0d54ca67c902d2d4e10a7.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.364eb9c8.chunk.css.map": "/static/css/2.364eb9c8.chunk.css.map",
+    "static/css/main.bf033fdb.chunk.css.map": "/static/css/main.bf033fdb.chunk.css.map",
+    "static/js/2.b75eef3f.chunk.js.LICENSE.txt": "/static/js/2.b75eef3f.chunk.js.LICENSE.txt",
+    "static/media/el-shorouk.png": "/static/media/el-shorouk.08df9f7c.png",
+    "static/media/indexLTR.scss": "/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/no-pic.png": "/static/media/no-pic.3e843205.png",
+    "static/media/no-pic2.png": "/static/media/no-pic2.32523e3a.png",
+    "static/media/pic.jpg": "/static/media/pic.6dbfbd41.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b11bc7a8.js",
+    "static/css/2.364eb9c8.chunk.css",
+    "static/js/2.b75eef3f.chunk.js",
+    "static/css/main.bf033fdb.chunk.css",
+    "static/js/main.0891f46b.chunk.js"
+  ]
+}
