@@ -14,6 +14,9 @@ export default (obj, setEditing) => async (dispatch, getState) => {
       url: "/department/edit",
       method: "PUT",
       data: { ...obj },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_DEPARTMENT,

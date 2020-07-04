@@ -14,6 +14,9 @@ export default (obj, setEditing) => async (dispatch, getState) => {
       url: "/gradeYear/edit",
       method: "PUT",
       data: { ...obj },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_GRADE_YEAR,

@@ -67,9 +67,35 @@ const Sidemenu = () => {
             </div>
           </div>
         </div>
+        <div
+          className="sidemenu-list-item"
+          onClick={(_) => handleExpand("course")}
+        >
+          <div className="f-jbetween-acenter pointer">
+            <button className="list-item-text">Course</button>
+            <button className="btn-transparent">
+              <i className="fa fa-caret-down" id="course-caret"></i>
+            </button>
+          </div>
+          <div className="nesting" id="course-nesting">
+            <div className="sidemenu-list-item">
+              <Link className="list-item-text" to="/dashboard/course/manage">
+                Manage Courses
+              </Link>
+            </div>
+            <div className="sidemenu-list-item">
+              <Link
+                className="list-item-text"
+                to="/dashboard/course/assistants"
+              >
+                Courses Assistants
+              </Link>
+            </div>
+          </div>
+        </div>
         <div className="sidemenu-list-item">
-          <Link className="list-item-text" to="/dashboard/course">
-            courses
+          <Link className="list-item-text" to="/dashboard/announcement">
+            announcement
           </Link>
         </div>
         {/* <div className="sidemenu-list-item">

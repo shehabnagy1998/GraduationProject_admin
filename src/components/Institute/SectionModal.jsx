@@ -56,7 +56,7 @@ const SectionModal = ({
             <div className="btns-container">
               <CircualarProgress condition={pageLoaders.editInstitute}>
                 {pageErrors.editInstitute === true && (
-                  <div>Failed to edit institute</div>
+                  <div className="text-error">Failed to edit institute</div>
                 )}
                 {pageErrors.editInstitute && pageErrors.editInstitute.msg && (
                   <div className="text-error">

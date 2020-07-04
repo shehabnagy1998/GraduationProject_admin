@@ -14,6 +14,9 @@ export default (code) => async (dispatch, getState) => {
       url: "/user/toggleApprove",
       method: "PUT",
       data: { code },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_USERS,

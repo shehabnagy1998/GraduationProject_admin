@@ -14,6 +14,9 @@ export default (obj) => async (dispatch, getState) => {
       url: "/institute/add",
       method: "POST",
       data: { ...obj },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_INSTITUTE,

@@ -33,3 +33,33 @@
     }
   }
 }
+
+.custom-select.css-2b097c-container {
+  .css-yk16xz-control,
+  .css-1pahdxg-control {
+    background: $dark !important;
+    border-color: $dark !important;
+    border-radius: 10px;
+    padding: 5px;
+    outline: none !important;
+  }
+  .css-1wa3eu0-placeholder {
+    color: #fff;
+    font-size: 1rem;
+
+    @media (min-width: 990px) {
+      font-size: 1.3rem;
+    }
+  }
+  .css-2613qy-menu div {
+    background: $dark !important;
+  }
+  .css-1rhbuit-multiValue {
+    background: $secondary;
+    border-radius: 10px;
+    color: #fff !important;
+    .css-12jo7m5 {
+      color: #fff !important;
+    }
+  }
+}

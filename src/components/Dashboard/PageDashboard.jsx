@@ -11,6 +11,8 @@ import PageDoctor from "../Doctor/PageDoctor";
 import PageAssistant from "../Assistant/PageAssistant";
 import PageAdmin from "../Admin/PageAdmin";
 import PageCourse from "../Course/PageCourse";
+import PageCourseAssistant from "../CourseAssistant/PageCourseAssistant";
+import PageAnnouncement from "../announcement/PageAnnouncement";
 
 const PageDashboard = () => {
   return (
@@ -24,7 +26,12 @@ const PageDashboard = () => {
           <Route path="/dashboard/institute" component={PageInstitute} />
           <Route path="/dashboard/department" component={PageDepartment} />
           <Route path="/dashboard/gradeYear" component={PageGradeYear} />
-          <Route path="/dashboard/course" component={PageCourse} />
+          <Route path="/dashboard/announcement" component={PageAnnouncement} />
+          <Route path="/dashboard/course/manage" component={PageCourse} />
+          <Route
+            path="/dashboard/course/assistants"
+            component={PageCourseAssistant}
+          />
           <Route path="/dashboard/user/student" component={PageStudent} />
           <Route path="/dashboard/user/doctor" component={PageDoctor} />
           <Route path="/dashboard/user/assistant" component={PageAssistant} />

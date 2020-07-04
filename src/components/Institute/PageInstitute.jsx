@@ -44,7 +44,7 @@ const PageInstitute = ({
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.addInstitute}>
             {pageErrors.addInstitute === true && (
-              <div>Failed to add institute</div>
+              <div className="text-error">Failed to add institute</div>
             )}
             {pageErrors.addInstitute && pageErrors.addInstitute.msg && (
               <div className="text-error">{pageErrors.addInstitute.msg}</div>

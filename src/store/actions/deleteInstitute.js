@@ -14,6 +14,9 @@ export default (id) => async (dispatch, getState) => {
       url: "/institute/remove",
       method: "DELETE",
       params: { id },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_DEPARTMENT,

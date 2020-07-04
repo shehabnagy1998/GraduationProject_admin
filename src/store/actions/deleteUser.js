@@ -8,12 +8,16 @@ import {
 
 export default (obj) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteUser: obj.code } });
+  console.log(obj);
   try {
     const res = await Axios({
       baseURL: API,
       url: "/user/remove",
       method: "DELETE",
       params: { ...obj },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     console.log(res);
     dispatch({

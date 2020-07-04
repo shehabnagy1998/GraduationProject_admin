@@ -60,7 +60,7 @@ const PageDepartment = ({
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.addDepartment}>
             {pageErrors.addDepartment === true && (
-              <div>Failed to add department</div>
+              <div className="text-error">Failed to add department</div>
             )}
             {pageErrors.addDepartment && pageErrors.addDepartment.msg && (
               <div className="text-error">{pageErrors.addDepartment.msg}</div>

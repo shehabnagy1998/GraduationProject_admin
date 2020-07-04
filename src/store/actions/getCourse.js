@@ -13,8 +13,10 @@ export default (_) => async (dispatch, getState) => {
       baseURL: API,
       url: "/course/getAll",
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
-    console.log(res);
     dispatch({
       type: REDUX_COURSE,
       value: res.data,

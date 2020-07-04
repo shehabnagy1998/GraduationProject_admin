@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import LogoIMG from "../../assets/images/el-shorouk.png";
 import * as $ from "jquery";
 import logout from "../../store/actions/logout";
+import { Link } from "react-router-dom";
 
-const Navbar = ({ browseHistory, userDetails, logoutUser }) => {
+const Navbar = ({ browseHistory, userDetails, logoutUser, NoBTN }) => {
   const menuToggler = (_) => {
     const elem1 = $(".menu-section");
     const elem2 = $(".content-section");
@@ -15,10 +16,14 @@ const Navbar = ({ browseHistory, userDetails, logoutUser }) => {
   return (
     <header className={`navbar-container`}>
       <div className="nav-info">
-        <button className="menu-toggler" onClick={menuToggler}>
-          <i className="fa fa-bars"></i>
-        </button>
-        <img src={LogoIMG} alt="" className="logo-img" />
+        {!NoBTN && (
+          <button className="menu-toggler" onClick={menuToggler}>
+            <i className="fa fa-bars"></i>
+          </button>
+        )}
+        <Link to="/">
+          <img src={LogoIMG} alt="" className="logo-img" />
+        </Link>
       </div>
       <div className="nav-info">
         <div className="dropdown">
@@ -27,6 +32,9 @@ const Navbar = ({ browseHistory, userDetails, logoutUser }) => {
           </button>
           <div className="dropdown-menu">
             {/* <button className="dropdown-item">profile-information</button> */}
+            <Link className="dropdown-item" to="/my-profile">
+              My Profile
+            </Link>
             <button className="dropdown-item" onClick={logoutUser}>
               logout
             </button>

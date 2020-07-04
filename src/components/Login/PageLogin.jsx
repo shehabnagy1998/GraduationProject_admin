@@ -73,7 +73,9 @@ const PageLogin = ({ pageLoaders, pageErrors, loginUser }) => {
           )}
         </div>
         <CircualarProgress condition={pageLoaders.login}>
-          {pageErrors.login === true && <div>Failed to login</div>}
+          {pageErrors.login === true && (
+            <div className="text-error">Failed to login</div>
+          )}
           {pageErrors.login && pageErrors.login.msg && (
             <div className="text-error">{pageErrors.login.msg}</div>
           )}

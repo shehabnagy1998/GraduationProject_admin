@@ -13,6 +13,9 @@ export default (_) => async (dispatch, getState) => {
       baseURL: API,
       url: "/gradeYear/getAll",
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_GRADE_YEAR,

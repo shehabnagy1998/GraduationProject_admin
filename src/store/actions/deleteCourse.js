@@ -14,6 +14,9 @@ export default (code) => async (dispatch, getState) => {
       url: "/course/remove",
       method: "DELETE",
       params: { code },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_COURSE,

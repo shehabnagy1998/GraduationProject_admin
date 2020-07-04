@@ -31,6 +31,11 @@ export default () => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_LOADERS, value: { logout: false } });
     const errRes = error.response;
     if (errRes && errRes.data) {
+      if (errRes.data.message === "Unauthorized user")
+        dispatch({
+          type: REDUX_USER,
+          value: {},
+        });
       dispatch({
         type: REDUX_PAGE_ERRORS,
         value: { logout: { msg: errRes.data.message } },

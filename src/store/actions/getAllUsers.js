@@ -14,6 +14,9 @@ export default (obj) => async (dispatch, getState) => {
       url: "/user/getAll",
       method: "GET",
       params: { ...obj },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_USERS,

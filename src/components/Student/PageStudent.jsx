@@ -165,7 +165,9 @@ const PageStudent = ({
         </div>
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.register}>
-            {pageErrors.register === true && <div>Failed to add student</div>}
+            {pageErrors.register === true && (
+              <div className="text-error">Failed to add student</div>
+            )}
             {pageErrors.register && pageErrors.register.msg && (
               <div className="text-error">{pageErrors.register.msg}</div>
             )}

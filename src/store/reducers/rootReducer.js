@@ -9,6 +9,10 @@ import {
   REDUX_BROWSE_HISTORY,
   REDUX_USERS,
   REDUX_COURSE,
+  REDUX_COURSE_ASSISTANT,
+  REDUX_ALL_COURSES_ASSISTANTS,
+  REDUX_SOCKET,
+  REDUX_ANNOUNCEMENT,
 } from "../CONSTANTS";
 
 const initState = {
@@ -22,6 +26,10 @@ const initState = {
   userArr: [],
   courseArr: [],
   browseHistory: {},
+  courseAssistants: [],
+  allCoursesAssistants: [],
+  socketObj: {},
+  announcementArr: [],
 };
 
 export default (state = initState, action) => {
@@ -84,6 +92,27 @@ export default (state = initState, action) => {
       return {
         ...state,
         courseArr: action.value,
+      };
+
+    case REDUX_COURSE_ASSISTANT:
+      return {
+        ...state,
+        courseAssistants: action.value,
+      };
+    case REDUX_ALL_COURSES_ASSISTANTS:
+      return {
+        ...state,
+        allCoursesAssistants: action.value,
+      };
+    case REDUX_SOCKET:
+      return {
+        ...state,
+        socketObj: action.value,
+      };
+    case REDUX_ANNOUNCEMENT:
+      return {
+        ...state,
+        announcementArr: action.value,
       };
 
     default:

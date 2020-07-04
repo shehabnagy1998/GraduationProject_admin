@@ -13,6 +13,9 @@ export default (institute_id) => async (dispatch, getState) => {
       baseURL: API,
       url: "/department/getAll",
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
 
     dispatch({

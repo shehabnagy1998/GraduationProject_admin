@@ -115,7 +115,9 @@ const PageCourse = ({
         </div>
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.addCourse}>
-            {pageErrors.addCourse === true && <div>Failed to add course</div>}
+            {pageErrors.addCourse === true && (
+              <div className="text-error">Failed to add course</div>
+            )}
             {pageErrors.addCourse && pageErrors.addCourse.msg && (
               <div className="text-error">{pageErrors.addCourse.msg}</div>
             )}

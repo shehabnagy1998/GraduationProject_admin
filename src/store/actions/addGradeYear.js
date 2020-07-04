@@ -14,6 +14,9 @@ export default (obj) => async (dispatch, getState) => {
       url: "/gradeYear/add",
       method: "POST",
       data: { ...obj },
+      headers: {
+        Authorization: `Bearer ${getState().userDetails.token}`,
+      },
     });
     dispatch({
       type: REDUX_GRADE_YEAR,

@@ -82,55 +82,63 @@ const SectionTable = ({
             ></i>
           </button>
         </h1>
-        <form className="search-container" onSubmit={handleSubmitSearch}>
-          <input
-            type="search"
-            id="text"
-            placeholder="Search..."
-            onChange={handleSearch}
-          />
-          <select
-            id="type"
-            onChange={(e) => setSearch({ ...search, type: e.target.value })}
-          >
-            <option value="">choose one</option>
-            <option value="name">name</option>
-          </select>
-          <button type="submit">
-            <i className="fa fa-search"></i>
-          </button>
-        </form>
+        {instituteArr.length >= 1 && (
+          <form className="search-container" onSubmit={handleSubmitSearch}>
+            <input
+              type="search"
+              id="text"
+              placeholder="Search..."
+              onChange={handleSearch}
+            />
+            <select
+              id="type"
+              onChange={(e) => setSearch({ ...search, type: e.target.value })}
+            >
+              <option value="">choose one</option>
+              <option value="name">name</option>
+            </select>
+            <button type="submit">
+              <i className="fa fa-search"></i>
+            </button>
+          </form>
+        )}
       </div>
-      <table className="table table-hover table-dark">
-        <thead>
-          <tr>
-            <th onClick={(e) => handleOrder("name", e)}>
-              Name <i className="fa fa-arrow-up"></i>
-            </th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td className="action-col">
-                <CircualarProgress
-                  effect={false}
-                  condition={pageLoaders.deleteInstitute === item.id}
-                >
-                  <button onClick={(_) => instituteDelete(item.id)}>
-                    <i className="fa fa-close"></i>
-                  </button>
-                </CircualarProgress>
-                <button onClick={(_) => setEditing(item)}>
-                  <i className="fa fa-edit"></i>
-                </button>
-              </td>
+      {instituteArr.length >= 1 ? (
+        <table className="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th onClick={(e) => handleOrder("name", e)}>
+                Name <i className="fa fa-arrow-up"></i>
+              </th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td className="action-col">
+                  <CircualarProgress
+                    effect={false}
+                    condition={pageLoaders.deleteInstitute === item.id}
+                  >
+                    <button onClick={(_) => instituteDelete(item.id)}>
+                      <i className="fa fa-close"></i>
+                    </button>
+                  </CircualarProgress>
+                  <button onClick={(_) => setEditing(item)}>
+                    <i className="fa fa-edit"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="empty-container">
+          <p>no available institutes</p>
+        </div>
+      )}
       {editing.id && <SectionModal editing={editing} setEditing={setEditing} />}
     </div>
   );

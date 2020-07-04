@@ -81,47 +81,49 @@ const SectionTable = ({
             ></i>
           </button>
         </h1>
-        <form className="search-container" onSubmit={handleSubmitSearch}>
-          <input
-            type="search"
-            id="text"
-            placeholder="Search..."
-            onChange={handleSearch}
-          />
-          <select
-            id="type"
-            onChange={(e) => setSearch({ ...search, type: e.target.value })}
-          >
-            <option value="">choose one</option>
-            <option value="code">code</option>
-            <option value="name">name</option>
-          </select>
-          <button type="submit">
-            <i className="fa fa-search"></i>
-          </button>
-        </form>
+        {userArr.length >= 1 && (
+          <form className="search-container" onSubmit={handleSubmitSearch}>
+            <input
+              type="search"
+              id="text"
+              placeholder="Search..."
+              onChange={handleSearch}
+            />
+            <select
+              id="type"
+              onChange={(e) => setSearch({ ...search, type: e.target.value })}
+            >
+              <option value="">choose one</option>
+              <option value="code">code</option>
+              <option value="name">name</option>
+            </select>
+            <button type="submit">
+              <i className="fa fa-search"></i>
+            </button>
+          </form>
+        )}
       </div>
-      <table className="table table-hover table-dark">
-        <thead>
-          <tr>
-            <th onClick={(e) => handleOrder("name", e)}>
-              code <i className="fa fa-arrow-up"></i>
-            </th>
-            <th onClick={(e) => handleOrder("name", e)}>
-              Name <i className="fa fa-arrow-up"></i>
-            </th>
-            <th onClick={(e) => handleOrder("is_approved", e)}>
-              Action <i className="fa fa-arrow-up"></i>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map(
-            (item) =>
-              item.code !== userDetails.code && (
-                <tr key={item.code}>
-                  <td>{item.code}</td>
-                  <td>{item.name}</td>
+      {userArr.length >= 1 ? (
+        <table className="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th onClick={(e) => handleOrder("name", e)}>
+                code <i className="fa fa-arrow-up"></i>
+              </th>
+              <th onClick={(e) => handleOrder("name", e)}>
+                Name <i className="fa fa-arrow-up"></i>
+              </th>
+              <th onClick={(e) => handleOrder("is_approved", e)}>
+                Action <i className="fa fa-arrow-up"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.code}>
+                <td>{item.code}</td>
+                <td>{item.name}</td>
+                {item.code !== userDetails.code && (
                   <td className="action-col">
                     <CircualarProgress
                       effect={false}
@@ -129,18 +131,23 @@ const SectionTable = ({
                     >
                       <button
                         onClick={(_) =>
-                          userDelete({ code: item.code, role_id: 2 })
+                          userDelete({ code: item.code, role_id: 3 })
                         }
                       >
                         <i className="fa fa-close"></i>
                       </button>
                     </CircualarProgress>
                   </td>
-                </tr>
-              )
-          )}
-        </tbody>
-      </table>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="empty-container">
+          <p>no available admins</p>
+        </div>
+      )}
     </div>
   );
 };
