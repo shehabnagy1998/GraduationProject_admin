@@ -98,6 +98,11 @@ const Sidemenu = () => {
             announcement
           </Link>
         </div>
+        <div className="sidemenu-list-item">
+          <Link className="list-item-text" to="/dashboard/help">
+            help
+          </Link>
+        </div>
         {/* <div className="sidemenu-list-item">
           <Link className="list-item-text" to="/">
             announcement

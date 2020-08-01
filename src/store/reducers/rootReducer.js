@@ -13,6 +13,7 @@ import {
   REDUX_ALL_COURSES_ASSISTANTS,
   REDUX_SOCKET,
   REDUX_ANNOUNCEMENT,
+  REDUX_HELP,
 } from "../CONSTANTS";
 
 const initState = {
@@ -30,6 +31,7 @@ const initState = {
   allCoursesAssistants: [],
   socketObj: {},
   announcementArr: [],
+  helpArr: [],
 };
 
 export default (state = initState, action) => {
@@ -113,6 +115,11 @@ export default (state = initState, action) => {
       return {
         ...state,
         announcementArr: action.value,
+      };
+    case REDUX_HELP:
+      return {
+        ...state,
+        helpArr: action.value,
       };
 
     default:

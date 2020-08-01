@@ -14,7 +14,8 @@
     margin: 0;
   }
   input,
-  select {
+  select,
+  textarea {
     border: 0;
     background: $secondary;
     border-radius: 10px;
@@ -23,7 +24,11 @@
     color: #fff;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
+    resize: none;
 
+    &.dark {
+      background: $dark;
+    }
     @media (min-width: 990px) {
       font-size: 1.3rem;
     }

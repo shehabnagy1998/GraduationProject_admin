@@ -13,6 +13,7 @@ import PageAdmin from "../Admin/PageAdmin";
 import PageCourse from "../Course/PageCourse";
 import PageCourseAssistant from "../CourseAssistant/PageCourseAssistant";
 import PageAnnouncement from "../announcement/PageAnnouncement";
+import PageHelp from "../Help/PageHelp";
 
 const PageDashboard = () => {
   return (
@@ -28,6 +29,7 @@ const PageDashboard = () => {
           <Route path="/dashboard/gradeYear" component={PageGradeYear} />
           <Route path="/dashboard/announcement" component={PageAnnouncement} />
           <Route path="/dashboard/course/manage" component={PageCourse} />
+          <Route path="/dashboard/help" component={PageHelp} />
           <Route
             path="/dashboard/course/assistants"
             component={PageCourseAssistant}
