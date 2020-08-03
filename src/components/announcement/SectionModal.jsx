@@ -46,7 +46,6 @@ const SectionModal = ({
     e.preventDefault();
     announcementEdit(editing, setEditing);
   };
-  console.log(ProfilePic);
   return (
     <>
       <div className="backdrop" />
@@ -73,7 +72,9 @@ const SectionModal = ({
                     onChange={handleFileChange}
                   />
                   <div className="img-overlay">
-                    <button onClick={(_) => ref.current.click()}>upload</button>
+                    <button type="button" onClick={(_) => ref.current.click()}>
+                      upload
+                    </button>
                   </div>
                 </div>
               </div>

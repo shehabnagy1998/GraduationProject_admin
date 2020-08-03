@@ -75,8 +75,12 @@ const PageAnnouncement = ({
               onChange={handleFileChange}
             />
             <div className="img-overlay">
-              <button onClick={(_) => ref.current.click()}>upload</button>
-              <button onClick={handleDelete}>delete</button>
+              <button type="button" onClick={(_) => ref.current.click()}>
+                upload
+              </button>
+              <button type="button" onClick={handleDelete}>
+                delete
+              </button>
             </div>
           </div>
           {errorState.image && (
