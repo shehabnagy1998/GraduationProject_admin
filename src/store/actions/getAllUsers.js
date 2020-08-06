@@ -4,7 +4,9 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_USERS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (obj) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { getAllUsers: true } });
@@ -22,12 +24,22 @@ export default (obj) => async (dispatch, getState) => {
       type: REDUX_USERS,
       value: res.data,
     });
+
     dispatch({ type: REDUX_PAGE_ERRORS, value: { getAllUsers: false } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { getAllUsers: false } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { getAllUsers: true } });
-    dispatch({ type: REDUX_PAGE_LOADERS, value: { getAllUsers: false } });
+    dispatch({ type: REDUX_PAGE_LOADERS, value: { getAllUsers: true } });
     const errRes = error.response;
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

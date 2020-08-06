@@ -5,7 +5,9 @@ import {
   API,
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (user, setModal) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { changePassword: true } });
@@ -19,7 +21,7 @@ export default (user, setModal) => async (dispatch, getState) => {
         Authorization: `Bearer ${getState().userDetails.token}`,
       },
     });
-
+    toast.success("User password has been changed");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { changePassword: null } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { changePassword: false } });
     setModal(false);
@@ -27,12 +29,15 @@ export default (user, setModal) => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { changePassword: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { changePassword: false } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { changePassword: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

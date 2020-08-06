@@ -6,6 +6,7 @@ import getAllUsers from "../../store/actions/getAllUsers";
 import deleteUser from "../../store/actions/deleteUser";
 import CircualarProgress from "../Loaders/CircualarProgress";
 import editStudentApprove from "../../store/actions/editStudentApprove";
+import Scrollbars from "react-custom-scrollbars";
 
 const SectionTable = ({
   userArr,
@@ -107,62 +108,66 @@ const SectionTable = ({
         )}
       </div>
       {userArr.length >= 1 ? (
-        <table className="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th onClick={(e) => handleOrder("name", e)}>
-                code <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Name <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Department <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Grade Year <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("is_approved", e)}>
-                Action <i className="fa fa-arrow-up"></i>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.code}>
-                <td>{item.code}</td>
-                <td>{item.name}</td>
-                <td>{item.department_name}</td>
-                <td>{item.grade_year_name}</td>
-                <td className="action-col">
-                  <CircualarProgress
-                    effect={false}
-                    condition={pageLoaders.deleteUser === item.code}
-                  >
-                    <button
-                      onClick={(_) =>
-                        userDelete({ code: item.code, role_id: 0 })
-                      }
-                    >
-                      <i className="fa fa-close"></i>
-                    </button>
-                  </CircualarProgress>
-                  <CircualarProgress
-                    effect={false}
-                    condition={pageLoaders.editStudentApprove === item.code}
-                  >
-                    <button
-                      style={{ color: item.is_approved ? "#fcbb3b" : "#ddd" }}
-                      onClick={(_) => studentApprove(item.code)}
-                    >
-                      <i className="fa fa-check-circle"></i>
-                    </button>
-                  </CircualarProgress>
-                </td>
+        <Scrollbars autoHide autoHeight autoHeightMax={500} autoHeightMin={100}>
+          <table className="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  code <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Name <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Department <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Grade Year <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("is_approved", e)}>
+                  Action <i className="fa fa-arrow-up"></i>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.code}>
+                  <td>{item.code}</td>
+                  <td>{item.name}</td>
+                  <td>{item.department_name}</td>
+                  <td>{item.grade_year_name}</td>
+                  <td className="action-col">
+                    <CircualarProgress
+                      effect={false}
+                      condition={pageLoaders.deleteUser === item.code}
+                    >
+                      <button
+                        onClick={(_) =>
+                          userDelete({ code: item.code, role_id: 0 })
+                        }
+                      >
+                        <i className="fa fa-close"></i>
+                      </button>
+                    </CircualarProgress>
+                    <CircualarProgress
+                      effect={false}
+                      condition={pageLoaders.editStudentApprove === item.code}
+                    >
+                      <button
+                        style={{ color: item.is_approved ? "#fcbb3b" : "#ddd" }}
+                        onClick={(_) =>
+                          studentApprove(item.code, item.is_approved)
+                        }
+                      >
+                        <i className="fa fa-check-circle"></i>
+                      </button>
+                    </CircualarProgress>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Scrollbars>
       ) : (
         <div className="empty-container">
           <p>no available students</p>
@@ -179,7 +184,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   usersGet: (_) => dispatch(getAllUsers()),
-  studentApprove: (code) => dispatch(editStudentApprove(code)),
+  studentApprove: (code, currentState) =>
+    dispatch(editStudentApprove(code, currentState)),
   userDelete: (id) => dispatch(deleteUser(id)),
 });
 

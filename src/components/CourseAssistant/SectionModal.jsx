@@ -19,6 +19,7 @@ const SectionModal = ({
   };
 
   useEffect(() => {
+    $(document).scrollTop(250);
     $("body").css("overflow", "hidden");
     return () => {
       $("body").css("overflow", "auto");
@@ -31,7 +32,7 @@ const SectionModal = ({
   };
   return (
     <>
-      <div className="backdrop" />
+      <div className="backdrop" onClick={(_) => setEditing({})} />
       <article className="modal">
         <div className="modal-container">
           <div className="modal-header">

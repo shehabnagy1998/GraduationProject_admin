@@ -4,7 +4,9 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_GRADE_YEAR,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (id) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteGradeYear: id } });
@@ -22,18 +24,22 @@ export default (id) => async (dispatch, getState) => {
       type: REDUX_GRADE_YEAR,
       value: res.data,
     });
+    toast.success("Grade year has been deleted");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { deleteGradeYear: null } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteGradeYear: null } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { deleteGradeYear: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteGradeYear: null } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { deleteGradeYear: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

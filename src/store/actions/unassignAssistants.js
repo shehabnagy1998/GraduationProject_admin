@@ -5,7 +5,9 @@ import {
   REDUX_PAGE_ERRORS,
   REDUX_COURSE,
   REDUX_ALL_COURSES_ASSISTANTS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (course_code) => async (dispatch, getState) => {
   dispatch({
@@ -23,7 +25,7 @@ export default (course_code) => async (dispatch, getState) => {
       },
     });
     dispatch({ type: REDUX_ALL_COURSES_ASSISTANTS, value: res.data });
-
+    toast.success("Assistant has been unassigned");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { unassignAssistants: null } });
     dispatch({
       type: REDUX_PAGE_LOADERS,
@@ -36,12 +38,15 @@ export default (course_code) => async (dispatch, getState) => {
       value: { unassignAssistants: null },
     });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { unassignAssistants: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

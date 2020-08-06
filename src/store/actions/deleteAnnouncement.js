@@ -4,8 +4,10 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_ANNOUNCEMENT,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
 import { convertToFormData } from "../../utils/helper";
+import { toast } from "react-toastify";
 
 export default (id) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteAnnouncement: id } });
@@ -23,6 +25,7 @@ export default (id) => async (dispatch, getState) => {
       type: REDUX_ANNOUNCEMENT,
       value: res.data,
     });
+    toast.success("Announcement has been deleted");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { deleteAnnouncement: null } });
     dispatch({
       type: REDUX_PAGE_LOADERS,
@@ -35,12 +38,15 @@ export default (id) => async (dispatch, getState) => {
       value: { deleteAnnouncement: null },
     });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { deleteAnnouncement: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

@@ -4,7 +4,9 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_COURSE,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (code) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteCourse: true } });
@@ -22,18 +24,22 @@ export default (code) => async (dispatch, getState) => {
       type: REDUX_COURSE,
       value: res.data,
     });
+    toast.success("Course has been deleted");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { deleteCourse: false } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteCourse: false } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { deleteCourse: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteCourse: false } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { deleteCourse: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

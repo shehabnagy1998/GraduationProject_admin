@@ -14,6 +14,7 @@ import {
   REDUX_SOCKET,
   REDUX_ANNOUNCEMENT,
   REDUX_HELP,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
 
 const initState = {
@@ -120,6 +121,10 @@ export default (state = initState, action) => {
       return {
         ...state,
         helpArr: action.value,
+      };
+    case REDUX_CLEAR:
+      return {
+        ...initState,
       };
 
     default:

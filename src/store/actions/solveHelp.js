@@ -4,8 +4,10 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_HELP,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
 import getHelps from "./getHelps";
+import { toast } from "react-toastify";
 
 export default (obj, setEditing) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { solveHelp: true } });
@@ -21,6 +23,7 @@ export default (obj, setEditing) => async (dispatch, getState) => {
     });
 
     setEditing({});
+    toast.success("Help request has been ansewerd");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { solveHelp: false } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { solveHelp: false } });
     await dispatch(getHelps());
@@ -29,5 +32,14 @@ export default (obj, setEditing) => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_LOADERS, value: { solveHelp: false } });
     const errRes = error.response;
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

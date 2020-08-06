@@ -4,9 +4,11 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_USERS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
-export default (code) => async (dispatch, getState) => {
+export default (code, currentState) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { editStudentApprove: code } });
   try {
     const res = await Axios({
@@ -22,18 +24,26 @@ export default (code) => async (dispatch, getState) => {
       type: REDUX_USERS,
       value: res.data,
     });
+    toast.success(
+      currentState == "1"
+        ? "User has been disapproved"
+        : "User has been approved"
+    );
     dispatch({ type: REDUX_PAGE_ERRORS, value: { editStudentApprove: null } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { editStudentApprove: null } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { editStudentApprove: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { editStudentApprove: null } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { editStudentApprove: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

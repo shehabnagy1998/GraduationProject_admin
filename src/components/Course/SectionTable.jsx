@@ -6,6 +6,7 @@ import SectionModal from "./SectionModal";
 import getCourse from "../../store/actions/getCourse";
 import deleteCourse from "../../store/actions/deleteCourse";
 import CircualarProgress from "../Loaders/CircualarProgress";
+import Scrollbars from "react-custom-scrollbars";
 
 const SectionTable = ({ courseArr, pageLoaders, courseGet, courseDelete }) => {
   const [items, setItems] = useState([]);
@@ -108,52 +109,54 @@ const SectionTable = ({ courseArr, pageLoaders, courseGet, courseDelete }) => {
         )}
       </div>
       {courseArr.length >= 1 ? (
-        <table className="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Code <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Name <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Doctor <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Department <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Grade Year <i className="fa fa-arrow-up"></i>
-              </th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.code}>
-                <td>{item.code}</td>
-                <td>{item.name}</td>
-                <td>{item.doctor_name}</td>
-                <td>{item.department_name}</td>
-                <td>{item.grade_year_name}</td>
-                <td className="action-col">
-                  <CircualarProgress
-                    effect={false}
-                    condition={pageLoaders.deleteCourse === item.code}
-                  >
-                    <button onClick={(_) => courseDelete(item.code)}>
-                      <i className="fa fa-close"></i>
-                    </button>
-                  </CircualarProgress>
-                  <button onClick={(_) => setEditing(item)}>
-                    <i className="fa fa-edit"></i>
-                  </button>
-                </td>
+        <Scrollbars autoHide autoHeight autoHeightMax={500} autoHeightMin={100}>
+          <table className="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Code <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Name <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Doctor <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Department <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Grade Year <i className="fa fa-arrow-up"></i>
+                </th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.code}>
+                  <td>{item.code}</td>
+                  <td>{item.name}</td>
+                  <td>{item.doctor_name}</td>
+                  <td>{item.department_name}</td>
+                  <td>{item.grade_year_name}</td>
+                  <td className="action-col">
+                    <CircualarProgress
+                      effect={false}
+                      condition={pageLoaders.deleteCourse === item.code}
+                    >
+                      <button onClick={(_) => courseDelete(item.code)}>
+                        <i className="fa fa-close"></i>
+                      </button>
+                    </CircualarProgress>
+                    <button onClick={(_) => setEditing(item)}>
+                      <i className="fa fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Scrollbars>
       ) : (
         <div className="empty-container">
           <p>no available courses</p>

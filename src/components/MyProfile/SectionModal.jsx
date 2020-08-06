@@ -13,10 +13,15 @@ const SectionModal = ({
   changePassModal,
   setChangePassModal,
 }) => {
+  const [oldScroll, setOldScroll] = useState(0);
   useEffect(() => {
+    $(document).scrollTop(250);
     $("body").css("overflow", "hidden");
+    setOldScroll($(document).scrollTop());
+    $(document).scrollTop(0);
     return () => {
-      $("body").css("overflow", "auto");
+      $(document).css("overflow", "auto");
+      $(document).scrollTop(oldScroll);
     };
   }, []);
 
@@ -78,7 +83,7 @@ const SectionModal = ({
 
   return (
     <>
-      <div className="backdrop" />
+      <div className="backdrop" onClick={(_) => setChangePassModal(false)} />
       <article className="modal">
         <div className="modal-container">
           <div className="modal-header">

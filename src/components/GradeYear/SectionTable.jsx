@@ -6,6 +6,7 @@ import SectionModal from "./SectionModal";
 import getGradeYear from "../../store/actions/getGradeYear";
 import deleteGradeYear from "../../store/actions/deleteGradeYear";
 import CircualarProgress from "../Loaders/CircualarProgress";
+import Scrollbars from "react-custom-scrollbars";
 
 const SectionTable = ({
   gradeYearArr,
@@ -104,36 +105,38 @@ const SectionTable = ({
         )}
       </div>
       {gradeYearArr.length >= 1 ? (
-        <table className="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Name <i className="fa fa-arrow-up"></i>
-              </th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td className="action-col">
-                  <CircualarProgress
-                    effect={false}
-                    condition={pageLoaders.deleteGradeYear === item.id}
-                  >
-                    <button onClick={(_) => gradeYearDelete(item.id)}>
-                      <i className="fa fa-close"></i>
-                    </button>
-                  </CircualarProgress>
-                  <button onClick={(_) => setEditing(item)}>
-                    <i className="fa fa-edit"></i>
-                  </button>
-                </td>
+        <Scrollbars autoHide autoHeight autoHeightMax={500} autoHeightMin={100}>
+          <table className="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Name <i className="fa fa-arrow-up"></i>
+                </th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td className="action-col">
+                    <CircualarProgress
+                      effect={false}
+                      condition={pageLoaders.deleteGradeYear === item.id}
+                    >
+                      <button onClick={(_) => gradeYearDelete(item.id)}>
+                        <i className="fa fa-close"></i>
+                      </button>
+                    </CircualarProgress>
+                    <button onClick={(_) => setEditing(item)}>
+                      <i className="fa fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Scrollbars>
       ) : (
         <div className="empty-container">
           <p>no available grade years</p>

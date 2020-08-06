@@ -159,11 +159,14 @@
   .menu-section {
     position: fixed;
     background: $secondary;
-    width: 25%;
     height: 100%;
     transition: 0.3s all;
     transform: translateX(-100%);
 
+    width: 65%;
+    @media (min-width: 990px) {
+      width: 25%;
+    }
     &.active {
       transform: translateX(0%);
     }
@@ -175,7 +178,11 @@
     min-height: 100vh;
     transform: translateX(0%);
     &.active {
-      transform: translateX(25%);
+      transform: translateX(65%);
+
+      @media (min-width: 990px) {
+        transform: translateX(25%);
+      }
     }
   }
 }
@@ -200,23 +207,27 @@
     display: none;
     flex-flow: column;
     padding: 10px;
-    border-radius: 10px;
-    background: #343b45;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: #fff;
     min-width: 200px;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     .dropdown-item {
       background: none;
       border: 0;
-      color: #fff;
+      color: #333;
       text-transform: capitalize;
       text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
     }
   }
 }
 
+.table-dark th,
+.table-dark td,
+.table-dark thead th {
+  white-space: nowrap;
+}
 .table {
   th {
     cursor: pointer;
@@ -245,17 +256,27 @@
   background: $dark;
   border-radius: 10px;
   padding: 10px;
+  display: flex;
+  width: 100%;
+  @media (min-width: 990px) {
+    width: 30%;
+  }
 
   input {
     background: none;
     border: 0;
     color: #fff;
+    width: 45%;
+    @media (min-width: 990px) {
+      width: 60%;
+    }
   }
   select {
     background: $dark;
     border: 0;
     color: #fff;
     margin: 0 5px;
+    flex-grow: 1;
   }
 
   button {

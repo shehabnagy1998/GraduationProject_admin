@@ -4,8 +4,10 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_ANNOUNCEMENT,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
 import { convertToFormData } from "../../utils/helper";
+import { toast } from "react-toastify";
 
 export default (obj, setEditing) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { editAnnouncement: true } });
@@ -23,6 +25,7 @@ export default (obj, setEditing) => async (dispatch, getState) => {
       type: REDUX_ANNOUNCEMENT,
       value: res.data,
     });
+    toast.success("Announcement has been edited");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { editAnnouncement: false } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { editAnnouncement: false } });
     setEditing({});
@@ -30,12 +33,15 @@ export default (obj, setEditing) => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { editAnnouncement: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { editAnnouncement: false } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { editAnnouncement: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

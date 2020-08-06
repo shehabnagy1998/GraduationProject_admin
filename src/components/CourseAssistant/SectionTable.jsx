@@ -6,6 +6,7 @@ import SectionModal from "./SectionModal";
 import listAll from "../../store/actions/listAll";
 import unassignAssistants from "../../store/actions/unassignAssistants";
 import CircualarProgress from "../Loaders/CircualarProgress";
+import Scrollbars from "react-custom-scrollbars";
 
 const SectionTable = ({
   allCoursesAssistants,
@@ -107,50 +108,54 @@ const SectionTable = ({
         )}
       </div>
       {allCoursesAssistants.length >= 1 ? (
-        <table className="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Code <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Name <i className="fa fa-arrow-up"></i>
-              </th>
-              <th>Assistants</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.code}>
-                <td>{item.course_code}</td>
-                <td>{item.course_name}</td>
-                <td>
-                  <div className="flex-column">
-                    {item.assistants.map((i) => (
-                      <span>{i.assistant_name}</span>
-                    ))}
-                  </div>
-                </td>
-
-                <td className="action-col">
-                  <CircualarProgress
-                    effect={false}
-                    condition={
-                      pageLoaders.unassignAssistants === item.course_code
-                    }
-                  >
-                    <button
-                      onClick={(_) => assistantsUnassignment(item.course_code)}
-                    >
-                      <i className="fa fa-close"></i>
-                    </button>
-                  </CircualarProgress>
-                </td>
+        <Scrollbars autoHide autoHeight autoHeightMax={500} autoHeightMin={100}>
+          <table className="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Code <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Name <i className="fa fa-arrow-up"></i>
+                </th>
+                <th>Assistants</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.code}>
+                  <td>{item.course_code}</td>
+                  <td>{item.course_name}</td>
+                  <td>
+                    <div className="flex-column">
+                      {item.assistants.map((i) => (
+                        <span>{i.assistant_name}</span>
+                      ))}
+                    </div>
+                  </td>
+
+                  <td className="action-col">
+                    <CircualarProgress
+                      effect={false}
+                      condition={
+                        pageLoaders.unassignAssistants === item.course_code
+                      }
+                    >
+                      <button
+                        onClick={(_) =>
+                          assistantsUnassignment(item.course_code)
+                        }
+                      >
+                        <i className="fa fa-close"></i>
+                      </button>
+                    </CircualarProgress>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Scrollbars>
       ) : (
         <div className="empty-container">
           <p>no assistants assigned to courses</p>

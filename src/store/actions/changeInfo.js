@@ -5,7 +5,9 @@ import {
   API,
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (user) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { changeInfo: true } });
@@ -23,18 +25,22 @@ export default (user) => async (dispatch, getState) => {
       type: REDUX_USER,
       value: { ...getState().userDetails, ...res.data },
     });
+    toast.success("User information has been changed");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { changeInfo: null } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { changeInfo: false } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { changeInfo: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { changeInfo: false } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { changeInfo: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

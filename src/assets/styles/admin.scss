@@ -19,9 +19,15 @@
     align-items: center;
   }
   .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-transform: capitalize;
     color: #fff;
+    @media (min-width: 600px) {
+      font-size: 1.8rem;
+    }
+    @media (min-width: 990px) {
+      font-size: 2rem;
+    }
 
     button {
       border: 0;
@@ -34,6 +40,11 @@
     justify-content: space-between;
     margin: 0 0 10px 0;
     align-items: center;
+    flex-flow: column;
+    width: 100%;
+    @media (min-width: 990px) {
+      flex-flow: row;
+    }
   }
   .form-control {
     input,

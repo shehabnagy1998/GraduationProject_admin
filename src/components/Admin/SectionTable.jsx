@@ -5,6 +5,7 @@ import { sortBy } from "lodash";
 import getAllUsers from "../../store/actions/getAllUsers";
 import deleteUser from "../../store/actions/deleteUser";
 import CircualarProgress from "../Loaders/CircualarProgress";
+import Scrollbars from "react-custom-scrollbars";
 
 const SectionTable = ({
   userArr,
@@ -104,45 +105,47 @@ const SectionTable = ({
         )}
       </div>
       {userArr.length >= 1 ? (
-        <table className="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th onClick={(e) => handleOrder("name", e)}>
-                code <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Name <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("is_approved", e)}>
-                Action <i className="fa fa-arrow-up"></i>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.code}>
-                <td>{item.code}</td>
-                <td>{item.name}</td>
-                {item.code !== userDetails.code && (
-                  <td className="action-col">
-                    <CircualarProgress
-                      effect={false}
-                      condition={pageLoaders.deleteUser === item.code}
-                    >
-                      <button
-                        onClick={(_) =>
-                          userDelete({ code: item.code, role_id: 3 })
-                        }
-                      >
-                        <i className="fa fa-close"></i>
-                      </button>
-                    </CircualarProgress>
-                  </td>
-                )}
+        <Scrollbars autoHide autoHeight autoHeightMax={500} autoHeightMin={100}>
+          <table className="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  code <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Name <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("is_approved", e)}>
+                  Action <i className="fa fa-arrow-up"></i>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.code}>
+                  <td>{item.code}</td>
+                  <td>{item.name}</td>
+                  {item.code !== userDetails.code && (
+                    <td className="action-col">
+                      <CircualarProgress
+                        effect={false}
+                        condition={pageLoaders.deleteUser === item.code}
+                      >
+                        <button
+                          onClick={(_) =>
+                            userDelete({ code: item.code, role_id: 3 })
+                          }
+                        >
+                          <i className="fa fa-close"></i>
+                        </button>
+                      </CircualarProgress>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Scrollbars>
       ) : (
         <div className="empty-container">
           <p>no available admins</p>

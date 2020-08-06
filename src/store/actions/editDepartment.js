@@ -4,7 +4,9 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_DEPARTMENT,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (obj, setEditing) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { editDepartment: true } });
@@ -22,6 +24,7 @@ export default (obj, setEditing) => async (dispatch, getState) => {
       type: REDUX_DEPARTMENT,
       value: res.data,
     });
+    toast.success("Department has been edited");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { editDepartment: false } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { editDepartment: false } });
     setEditing({});
@@ -29,12 +32,15 @@ export default (obj, setEditing) => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { editDepartment: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { editDepartment: false } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { editDepartment: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

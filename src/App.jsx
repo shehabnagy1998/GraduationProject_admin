@@ -12,24 +12,32 @@ import PageDashboard from "./components/Dashboard/PageDashboard";
 import PageSpinner from "./components/Loaders/PageSpinner";
 import socketIOClient from "socket.io-client";
 import PageMyProfile from "./components/MyProfile/PageMyProfile";
+import checkToken from "./store/actions/checkToken";
 
-function App({ pageLoaders, browseHistorySet, userDetails, socketSet }) {
+function App({
+  pageLoaders,
+  browseHistorySet,
+  userDetails,
+  socketSet,
+  tokenCheck,
+}) {
   const browseHistory = useHistory();
   useEffect(() => {
     browseHistorySet(browseHistory);
-    const socket = socketIOClient(SOCKET_API);
-    socket.on("NOTIFICATION", (data) => {
-      console.log(data);
-    });
-    socketSet(socket);
-    return (_) => {
-      socket.disconnect();
-    };
+    tokenCheck();
+    // const socket = socketIOClient(SOCKET_API);
+    // socket.on("NOTIFICATION", (data) => {
+    //   console.log(data);
+    // });
+    // socketSet(socket);
+    // return (_) => {
+    //   socket.disconnect();
+    // };
   }, []);
 
   return (
     <>
-      {pageLoaders.logout && <PageSpinner />}
+      {(pageLoaders.logout || pageLoaders.checkToken) && <PageSpinner />}
       <ToastContainer />
       <Switch>
         {!userDetails.code && (
@@ -57,6 +65,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   browseHistorySet: (value) => dispatch({ type: REDUX_BROWSE_HISTORY, value }),
   socketSet: (value) => dispatch({ type: REDUX_SOCKET, value }),
+  tokenCheck: () => dispatch(checkToken()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

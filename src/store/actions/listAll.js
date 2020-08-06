@@ -6,7 +6,9 @@ import {
   REDUX_COURSE,
   RE,
   REDUX_ALL_COURSES_ASSISTANTS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (course_code) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { listAll: true } });
@@ -24,15 +26,17 @@ export default (course_code) => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_LOADERS, value: { listAll: false } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { listAll: true } });
-    dispatch({ type: REDUX_PAGE_LOADERS, value: { listAll: false } });
+    dispatch({ type: REDUX_PAGE_LOADERS, value: { listAll: true } });
     const errRes = error.response;
     console.log(errRes);
-    if (errRes && errRes.data) {
+    if (errRes && errRes.status === 401) {
       dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { listAll: { msg: errRes.data.message } },
+        type: REDUX_CLEAR,
       });
+      return;
     }
-    console.log(errRes);
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

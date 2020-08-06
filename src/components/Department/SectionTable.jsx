@@ -6,6 +6,7 @@ import SectionModal from "./SectionModal";
 import getDepartment from "../../store/actions/getDepartment";
 import deleteDepartment from "../../store/actions/deleteDepartment";
 import CircualarProgress from "../Loaders/CircualarProgress";
+import Scrollbars from "react-custom-scrollbars";
 
 const SectionTable = ({
   departmentArr,
@@ -107,40 +108,42 @@ const SectionTable = ({
         )}
       </div>
       {departmentArr.length >= 1 ? (
-        <table className="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th onClick={(e) => handleOrder("name", e)}>
-                Name <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("institute_name", e)}>
-                insitute <i className="fa fa-arrow-up"></i>
-              </th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.institute_name}</td>
-                <td className="action-col">
-                  <CircualarProgress
-                    effect={false}
-                    condition={pageLoaders.deleteDepartment === item.id}
-                  >
-                    <button onClick={(_) => departmentDelete(item.id)}>
-                      <i className="fa fa-close"></i>
-                    </button>
-                  </CircualarProgress>
-                  <button onClick={(_) => setEditing(item)}>
-                    <i className="fa fa-edit"></i>
-                  </button>
-                </td>
+        <Scrollbars autoHide autoHeight autoHeightMax={500} autoHeightMin={100}>
+          <table className="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th onClick={(e) => handleOrder("name", e)}>
+                  Name <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("institute_name", e)}>
+                  insitute <i className="fa fa-arrow-up"></i>
+                </th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>{item.institute_name}</td>
+                  <td className="action-col">
+                    <CircualarProgress
+                      effect={false}
+                      condition={pageLoaders.deleteDepartment === item.id}
+                    >
+                      <button onClick={(_) => departmentDelete(item.id)}>
+                        <i className="fa fa-close"></i>
+                      </button>
+                    </CircualarProgress>
+                    <button onClick={(_) => setEditing(item)}>
+                      <i className="fa fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Scrollbars>
       ) : (
         <div className="empty-container">
           <p>no available department</p>

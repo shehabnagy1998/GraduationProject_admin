@@ -4,6 +4,7 @@ import * as $ from "jquery";
 import { sortBy } from "lodash";
 import SectionModal from "./SectionModal";
 import getHelps from "../../store/actions/getHelps";
+import Scrollbars from "react-custom-scrollbars";
 
 const SectionTable = ({ helpArr, pageLoaders, helpGet, departmentDelete }) => {
   const [items, setItems] = useState([]);
@@ -98,43 +99,45 @@ const SectionTable = ({ helpArr, pageLoaders, helpGet, departmentDelete }) => {
         )}
       </div>
       {helpArr.length >= 1 ? (
-        <table className="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th onClick={(e) => handleOrder("subject", e)}>
-                subject <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("issuer", e)}>
-                issuer <i className="fa fa-arrow-up"></i>
-              </th>
-              <th onClick={(e) => handleOrder("issuer", e)}>
-                solved <i className="fa fa-arrow-up"></i>
-              </th>
+        <Scrollbars autoHide autoHeight autoHeightMax={500} autoHeightMin={100}>
+          <table className="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th onClick={(e) => handleOrder("subject", e)}>
+                  subject <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("issuer", e)}>
+                  issuer <i className="fa fa-arrow-up"></i>
+                </th>
+                <th onClick={(e) => handleOrder("issuer", e)}>
+                  solved <i className="fa fa-arrow-up"></i>
+                </th>
 
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.id}>
-                <td>{item.subject}</td>
-                <td>{item.issuer}</td>
-                <td>
-                  {item.solution ? (
-                    <div className="green-dot" />
-                  ) : (
-                    <div className="red-dot" />
-                  )}
-                </td>
-                <td className="action-col">
-                  <button onClick={(_) => setEditing(item)}>
-                    <i className="fa fa-edit"></i>
-                  </button>
-                </td>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.subject}</td>
+                  <td>{item.issuer}</td>
+                  <td>
+                    {item.solution ? (
+                      <div className="green-dot" />
+                    ) : (
+                      <div className="red-dot" />
+                    )}
+                  </td>
+                  <td className="action-col">
+                    <button onClick={(_) => setEditing(item)}>
+                      <i className="fa fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Scrollbars>
       ) : (
         <div className="empty-container">
           <p>no available help requests</p>

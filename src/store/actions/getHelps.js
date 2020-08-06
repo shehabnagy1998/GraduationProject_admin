@@ -4,7 +4,9 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_HELP,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default () => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { getHelps: true } });
@@ -25,8 +27,17 @@ export default () => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_LOADERS, value: { getHelps: false } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { getHelps: true } });
-    dispatch({ type: REDUX_PAGE_LOADERS, value: { getHelps: false } });
+    dispatch({ type: REDUX_PAGE_LOADERS, value: { getHelps: true } });
     const errRes = error.response;
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

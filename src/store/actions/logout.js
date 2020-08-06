@@ -5,7 +5,9 @@ import {
   API,
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default () => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { logout: true } });
@@ -30,17 +32,15 @@ export default () => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { logout: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { logout: false } });
     const errRes = error.response;
-    if (errRes && errRes.data) {
-      if (errRes.data.message === "Unauthorized user")
-        dispatch({
-          type: REDUX_USER,
-          value: {},
-        });
-      dispatch({
-        type: REDUX_PAGE_ERRORS,
-        value: { logout: { msg: errRes.data.message } },
-      });
-    }
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

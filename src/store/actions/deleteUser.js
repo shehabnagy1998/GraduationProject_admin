@@ -4,7 +4,9 @@ import {
   REDUX_PAGE_LOADERS,
   REDUX_PAGE_ERRORS,
   REDUX_USERS,
+  REDUX_CLEAR,
 } from "../CONSTANTS";
+import { toast } from "react-toastify";
 
 export default (obj) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteUser: obj.code } });
@@ -19,11 +21,11 @@ export default (obj) => async (dispatch, getState) => {
         Authorization: `Bearer ${getState().userDetails.token}`,
       },
     });
-    console.log(res);
     dispatch({
       type: REDUX_USERS,
       value: res.data,
     });
+    toast.success("User has been deleted");
     dispatch({ type: REDUX_PAGE_ERRORS, value: { deleteUser: false } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteUser: null } });
   } catch (error) {
@@ -31,5 +33,14 @@ export default (obj) => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_LOADERS, value: { deleteUser: null } });
     const errRes = error.response;
     console.log(errRes);
+    if (errRes && errRes.status === 401) {
+      dispatch({
+        type: REDUX_CLEAR,
+      });
+      return;
+    }
+    if (errRes && errRes.data) {
+      toast.error(errRes.data.message);
+    }
   }
 };

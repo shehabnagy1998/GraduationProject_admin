@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import * as $ from "jquery";
 import editCourse from "../../store/actions/editCourse";
@@ -17,8 +17,8 @@ const SectionModal = ({
   const handleChange = (e) => {
     setEditing({ ...editing, [e.target.id]: e.target.value });
   };
-
   useEffect(() => {
+    $(document).scrollTop(250);
     $("body").css("overflow", "hidden");
     return () => {
       $("body").css("overflow", "auto");
@@ -31,7 +31,7 @@ const SectionModal = ({
   };
   return (
     <>
-      <div className="backdrop" />
+      <div className="backdrop" onClick={(_) => setEditing({})} />
       <article className="modal">
         <div className="modal-container">
           <div className="modal-header">
