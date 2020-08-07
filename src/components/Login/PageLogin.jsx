@@ -43,51 +43,71 @@ const PageLogin = ({ pageLoaders, pageErrors, loginUser }) => {
   };
 
   return (
-    <main className="login-page">
-      <form onSubmit={handleSubmit} className="login-content-section">
-        <h1 className="title">Login</h1>
-        <div className="form-control">
-          <input
-            type="email"
-            placeholder="Email"
-            id="email"
-            onChange={handleInputValidated}
-            required
-          />
-          {errorState.email && (
-            <div className="text-error">must be like example@example.com</div>
-          )}
-        </div>
-        <div className="form-control">
-          <input
-            type="password"
-            placeholder="Password"
-            id="password"
-            required
-            onChange={handleInputValidated}
-          />
-          {errorState.password && (
-            <div className="text-error">
-              must be 8 characters at least containing numbers and uppercases
-            </div>
-          )}
-        </div>
-        <CircualarProgress condition={pageLoaders.login}>
-          {pageErrors.login === true && (
-            <div className="text-error">Failed to login</div>
-          )}
-          {pageErrors.login && pageErrors.login.msg && (
-            <div className="text-error">{pageErrors.login.msg}</div>
-          )}
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
-        </CircualarProgress>
-      </form>
-      <div className="login-img-section">
-        <img src={BackIMG} alt="" />
-      </div>
-    </main>
+    <>
+      {/* <Helmet>
+        <title>EA-Study | Login</title>
+        <meta charSet="utf-8" />
+      </Helmet> */}
+      <main className="form-pages-container">
+        <form className="text-container" onSubmit={handleSubmit}>
+          <h1 className="title">login</h1>
+
+          <div className="form-control">
+            <input
+              type="email"
+              placeholder="Email"
+              id="email"
+              onChange={handleInputValidated}
+              required
+            />
+            {errorState.email && (
+              <div className="text-error">must be like example@example.com</div>
+            )}
+          </div>
+          <div className="form-control">
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              required
+              onChange={handleInputValidated}
+            />
+            {errorState.password && (
+              <div className="text-error">
+                must be 8 characters at least containing numbers and uppercases
+              </div>
+            )}
+          </div>
+          <CircualarProgress condition={pageLoaders.login} effect={true}>
+            {pageErrors.login === 1 && (
+              <div className="text-error">Failed to login</div>
+            )}
+            {pageErrors.login === 2 && (
+              <div className="text-error">Email not exist</div>
+            )}
+            {pageErrors.login === 3 && (
+              <div className="text-error">Password not correct</div>
+            )}
+            {pageErrors.login === 4 && (
+              <div className="text-error">This account is not approved yet</div>
+            )}
+            <button type="submit" className="btn btn-primary btn-block">
+              login
+            </button>
+          </CircualarProgress>
+        </form>
+        <article className="login-picture-container">
+          <img src={BackIMG} alt="" />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path
+              fill="#fff"
+              fillOpacity="1"
+              d="M0,224L48,229.3C96,235,192,245,288,213.3C384,181,480,107,576,101.3C672,96,768,160,864,202.7C960,245,1056,267,1152,229.3C1248,192,1344,96,1392,48L1440,0L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+          </svg>
+        </article>
+      </main>
+    </>
   );
 };
 

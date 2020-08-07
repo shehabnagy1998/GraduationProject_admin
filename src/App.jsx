@@ -10,7 +10,6 @@ import {
 } from "./store/CONSTANTS";
 import PageDashboard from "./components/Dashboard/PageDashboard";
 import PageSpinner from "./components/Loaders/PageSpinner";
-import socketIOClient from "socket.io-client";
 import PageMyProfile from "./components/MyProfile/PageMyProfile";
 import checkToken from "./store/actions/checkToken";
 
