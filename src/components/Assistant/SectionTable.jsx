@@ -125,7 +125,7 @@ const SectionTable = ({ userArr, pageLoaders, usersGet, userDelete }) => {
                     >
                       <button
                         onClick={(_) =>
-                          userDelete({ code: item.code, role_id: 2 })
+                          userDelete({ code: item.code, role_id: 1 })
                         }
                       >
                         <i className="fa fa-close"></i>
@@ -152,7 +152,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  usersGet: (_) => dispatch(getAllUsers()),
+  usersGet: (obj) => dispatch(getAllUsers(obj)),
   userDelete: (id) => dispatch(deleteUser(id)),
 });
 

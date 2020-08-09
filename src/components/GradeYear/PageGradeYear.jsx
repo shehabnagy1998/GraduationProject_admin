@@ -43,12 +43,6 @@ const PageGradeYear = ({
         </div>
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.addGradeYear}>
-            {pageErrors.addGradeYear === true && (
-              <div className="text-error">Failed to add grade year</div>
-            )}
-            {pageErrors.addGradeYear && pageErrors.addGradeYear.msg && (
-              <div className="text-error">{pageErrors.addGradeYear.msg}</div>
-            )}
             <button className="btn btn-primary center">create</button>
           </CircualarProgress>
         </div>

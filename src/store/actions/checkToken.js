@@ -7,6 +7,9 @@ import {
   REDUX_IS_LOGED,
   REDUX_CLEAR,
 } from "../CONSTANTS";
+import { capitalizeSentence } from "../../utils/helper";
+import clearAll from "./clearAll";
+import { toast } from "react-toastify";
 
 export default (_) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { checkToken: true } });
@@ -27,13 +30,11 @@ export default (_) => async (dispatch, getState) => {
     dispatch({ type: REDUX_PAGE_LOADERS, value: { checkToken: false } });
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { checkToken: true } });
-    dispatch({ type: REDUX_PAGE_LOADERS, value: { checkToken: true } });
+    dispatch({ type: REDUX_PAGE_LOADERS, value: { checkToken: false } });
     const errRes = error.response;
     console.log(errRes);
     if (errRes && errRes.status === 401) {
-      dispatch({
-        type: REDUX_CLEAR,
-      });
+      dispatch(clearAll());
       return;
     } else dispatch({ type: REDUX_PAGE_LOADERS, value: { checkToken: true } });
   }

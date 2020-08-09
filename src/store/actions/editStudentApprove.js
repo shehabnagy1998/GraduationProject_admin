@@ -7,6 +7,8 @@ import {
   REDUX_CLEAR,
 } from "../CONSTANTS";
 import { toast } from "react-toastify";
+import { capitalizeSentence } from "../../utils/helper";
+import clearAll from "./clearAll";
 
 export default (code, currentState) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { editStudentApprove: code } });
@@ -37,13 +39,13 @@ export default (code, currentState) => async (dispatch, getState) => {
     const errRes = error.response;
     console.log(errRes);
     if (errRes && errRes.status === 401) {
-      dispatch({
-        type: REDUX_CLEAR,
-      });
+      dispatch(clearAll());
       return;
     }
     if (errRes && errRes.data) {
-      toast.error(errRes.data.message);
+      toast.error(capitalizeSentence(errRes.data.message));
+    } else {
+      toast.error("Failed to do the operation, try again");
     }
   }
 };

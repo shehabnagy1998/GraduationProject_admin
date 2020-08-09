@@ -174,12 +174,6 @@ const PageMyProfile = ({
             </div>
             <div className="btns-container center">
               <CircualarProgress condition={pageLoaders.changeInfo}>
-                {pageErrors.changeInfo === true && (
-                  <div className="text-error">Failed to edit user info</div>
-                )}
-                {pageErrors.changeInfo && pageErrors.changeInfo.msg && (
-                  <div className="text-error">{pageErrors.changeInfo.msg}</div>
-                )}
                 <button className="btn btn-primary center  ">edit</button>
               </CircualarProgress>
               <button

@@ -111,12 +111,6 @@ const PageAnnouncement = ({
         </div>
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.addAnnouncement}>
-            {pageErrors.addAnnouncement === true && (
-              <div className="text-error">Failed to add announcement</div>
-            )}
-            {pageErrors.addAnnouncement && pageErrors.addAnnouncement.msg && (
-              <div className="text-error">{pageErrors.addAnnouncement.msg}</div>
-            )}
             <button className="btn btn-primary center">create</button>
           </CircualarProgress>
         </div>

@@ -79,18 +79,6 @@ const PageLogin = ({ pageLoaders, pageErrors, loginUser }) => {
             )}
           </div>
           <CircualarProgress condition={pageLoaders.login} effect={true}>
-            {pageErrors.login === 1 && (
-              <div className="text-error">Failed to login</div>
-            )}
-            {pageErrors.login === 2 && (
-              <div className="text-error">Email not exist</div>
-            )}
-            {pageErrors.login === 3 && (
-              <div className="text-error">Password not correct</div>
-            )}
-            {pageErrors.login === 4 && (
-              <div className="text-error">This account is not approved yet</div>
-            )}
             <button type="submit" className="btn btn-primary btn-block">
               login
             </button>

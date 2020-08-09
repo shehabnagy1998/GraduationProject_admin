@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { convertToFormData } from "../../utils/helper";
+import { convertToFormData, capitalizeSentence } from "../../utils/helper";
 import {
   REDUX_USER,
   API,
@@ -8,6 +8,7 @@ import {
   REDUX_CLEAR,
 } from "../CONSTANTS";
 import { toast } from "react-toastify";
+import clearAll from "./clearAll";
 
 export default (user) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { changeInfo: true } });
@@ -34,13 +35,13 @@ export default (user) => async (dispatch, getState) => {
     const errRes = error.response;
     console.log(errRes);
     if (errRes && errRes.status === 401) {
-      dispatch({
-        type: REDUX_CLEAR,
-      });
+      dispatch(clearAll());
       return;
     }
     if (errRes && errRes.data) {
-      toast.error(errRes.data.message);
+      toast.error(capitalizeSentence(errRes.data.message));
+    } else {
+      toast.error("Failed to change user info");
     }
   }
 };

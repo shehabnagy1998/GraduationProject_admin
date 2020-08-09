@@ -132,12 +132,6 @@ const PageAssistant = ({
 
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.register}>
-            {pageErrors.register === true && (
-              <div className="text-error">Failed to add assistant</div>
-            )}
-            {pageErrors.register && pageErrors.register.msg && (
-              <div className="text-error">{pageErrors.register.msg}</div>
-            )}
             <button className="btn btn-primary center">create</button>
           </CircualarProgress>
         </div>

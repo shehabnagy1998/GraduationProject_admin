@@ -27,11 +27,13 @@ const PageCourseAssistant = ({
     course_code: "",
     assistant_codes: [],
   });
+
   useEffect(() => {
     courseGet();
     usersGetAll({ role_id: 1 });
     allList();
   }, []);
+
   useEffect(() => {
     if (courseAssistants.length >= 1) {
       let arr = courseAssistants.map((i) => ({
@@ -42,7 +44,7 @@ const PageCourseAssistant = ({
     }
   }, [courseAssistants]);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const id = e.target.id,
       value = e.target.value;
     assistantList(value);
@@ -74,9 +76,9 @@ const PageCourseAssistant = ({
       course_code: state.course_code,
       assistant_codes: state.assistant_codes.map((i) => i.value),
     };
-    // if (checkErrors()) {
-    assistantAssign(obj);
-    // }
+    if (obj.assistant_codes.length >= 1) {
+      assistantAssign(obj);
+    }
   };
 
   const animatedComponents = makeAnimated();
@@ -113,14 +115,6 @@ const PageCourseAssistant = ({
         </div>
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.assignAssistants}>
-            {pageErrors.assignAssistants === true && (
-              <div className="text-error">Failed to assign assistants</div>
-            )}
-            {pageErrors.assignAssistants && pageErrors.assignAssistants.msg && (
-              <div className="text-error">
-                {pageErrors.assignAssistants.msg}
-              </div>
-            )}
             <button className="btn btn-primary center">Assign</button>
           </CircualarProgress>
         </div>

@@ -1,4 +1,4 @@
-export const convertToFormData = obj => {
+export const convertToFormData = (obj) => {
   const formData = new FormData();
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -7,4 +7,9 @@ export const convertToFormData = obj => {
     }
   }
   return formData;
+};
+
+export const capitalizeSentence = (s) => {
+  if (typeof s !== "string") return "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
 };

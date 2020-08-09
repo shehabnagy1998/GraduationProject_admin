@@ -162,7 +162,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  usersGet: (_) => dispatch(getAllUsers()),
+  usersGet: (obj) => dispatch(getAllUsers(obj)),
   userDelete: (id) => dispatch(deleteUser(id)),
 });
 

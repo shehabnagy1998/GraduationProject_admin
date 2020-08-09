@@ -7,6 +7,7 @@ import {
   REDUX_CLEAR,
 } from "../CONSTANTS";
 import { toast } from "react-toastify";
+import clearAll from "./clearAll";
 
 export default (institute_id) => async (dispatch, getState) => {
   dispatch({ type: REDUX_PAGE_LOADERS, value: { getDepartment: true } });
@@ -32,13 +33,8 @@ export default (institute_id) => async (dispatch, getState) => {
     const errRes = error.response;
     console.log(errRes);
     if (errRes && errRes.status === 401) {
-      dispatch({
-        type: REDUX_CLEAR,
-      });
+      dispatch(clearAll());
       return;
-    }
-    if (errRes && errRes.data) {
-      toast.error(errRes.data.message);
     }
   }
 };

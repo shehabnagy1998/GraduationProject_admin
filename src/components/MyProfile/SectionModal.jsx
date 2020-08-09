@@ -145,14 +145,6 @@ const SectionModal = ({
 
             <div className="btns-container">
               <CircualarProgress condition={pageLoaders.changePassword}>
-                {pageErrors.changePassword === true && (
-                  <div className="text-error">Failed to change password</div>
-                )}
-                {pageErrors.changePassword && pageErrors.changePassword.msg && (
-                  <div className="text-error">
-                    {pageErrors.changePassword.msg}
-                  </div>
-                )}
                 <button className="btn btn-primary center">Change</button>
               </CircualarProgress>
             </div>

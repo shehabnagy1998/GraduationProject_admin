@@ -43,12 +43,6 @@ const PageInstitute = ({
         </div>
         <div className="btns-container">
           <CircualarProgress condition={pageLoaders.addInstitute}>
-            {pageErrors.addInstitute === true && (
-              <div className="text-error">Failed to add institute</div>
-            )}
-            {pageErrors.addInstitute && pageErrors.addInstitute.msg && (
-              <div className="text-error">{pageErrors.addInstitute.msg}</div>
-            )}
             <button className="btn btn-primary center">create</button>
           </CircualarProgress>
         </div>

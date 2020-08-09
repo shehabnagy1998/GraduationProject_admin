@@ -21,9 +21,11 @@ const Navbar = ({ browseHistory, userDetails, logoutUser, NoBTN }) => {
             <i className="fa fa-bars"></i>
           </button>
         )}
-        <Link to="/">
-          <img src={LogoIMG} alt="" className="logo-img" />
-        </Link>
+        <div className="navbar-img-container">
+          <Link to="/">
+            <img src={LogoIMG} alt="" className="logo-img" />
+          </Link>
+        </div>
       </div>
       <div className="nav-info">
         <div className="dropdown">

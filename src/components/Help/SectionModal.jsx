@@ -57,14 +57,6 @@ const SectionModal = ({
 
             <div className="btns-container">
               <CircualarProgress condition={pageLoaders.solveHelp}>
-                {pageErrors.solveHelp === true && (
-                  <div className="text-error">
-                    Failed to submit request help solution
-                  </div>
-                )}
-                {pageErrors.solveHelp && pageErrors.solveHelp.msg && (
-                  <div className="text-error">{pageErrors.solveHelp.msg}</div>
-                )}
                 <button className="btn btn-primary center">submit</button>
               </CircualarProgress>
             </div>

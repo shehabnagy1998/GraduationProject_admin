@@ -62,7 +62,6 @@ const SectionTable = ({ userArr, pageLoaders, usersGet, userDelete }) => {
       setItems(userArr);
     }
   };
-  console.log(items);
   return (
     <div className="table-container">
       <div className="title-container">
@@ -153,7 +152,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  usersGet: (_) => dispatch(getAllUsers()),
+  usersGet: (obj) => dispatch(getAllUsers(obj)),
   userDelete: (id) => dispatch(deleteUser(id)),
 });
 

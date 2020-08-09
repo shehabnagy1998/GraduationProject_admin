@@ -8,6 +8,8 @@ import {
   REDUX_CLEAR,
 } from "../CONSTANTS";
 import { toast } from "react-toastify";
+import clearAll from "./clearAll";
+import { capitalizeSentence } from "../../utils/helper";
 
 export default (course_code) => async (dispatch, getState) => {
   dispatch({
@@ -40,13 +42,13 @@ export default (course_code) => async (dispatch, getState) => {
     const errRes = error.response;
     console.log(errRes);
     if (errRes && errRes.status === 401) {
-      dispatch({
-        type: REDUX_CLEAR,
-      });
+      dispatch(clearAll());
       return;
     }
     if (errRes && errRes.data) {
-      toast.error(errRes.data.message);
+      toast.error(capitalizeSentence(errRes.data.message));
+    } else {
+      toast.error("Failed to unassign assistants from the course");
     }
   }
 };
