@@ -28,7 +28,6 @@ export default () => async (dispatch, getState) => {
     });
     dispatch({ type: REDUX_PAGE_ERRORS, value: { logout: null } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { logout: false } });
-    getState().browseHistory.push("/login");
   } catch (error) {
     dispatch({ type: REDUX_PAGE_ERRORS, value: { logout: true } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { logout: false } });
