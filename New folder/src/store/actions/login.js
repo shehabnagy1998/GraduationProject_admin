@@ -23,6 +23,7 @@ export default (user) => async (dispatch, getState) => {
       type: REDUX_USER,
       value: { ...res.data },
     });
+    console.log(res);
     dispatch({ type: REDUX_PAGE_ERRORS, value: { login: null } });
     dispatch({ type: REDUX_PAGE_LOADERS, value: { login: false } });
     getState().browseHistory.push("/dashboard");
